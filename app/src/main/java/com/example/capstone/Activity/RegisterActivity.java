@@ -133,6 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
                 bytes = byteArrayOutputStream.toByteArray();
             }
             catch (IOException e) {
+                bytes = null;
                 e.printStackTrace();
             }
         } else {
