@@ -162,6 +162,8 @@ public class MusicService extends MediaSessionService {
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        player.stop();
+                        stopSelf();
                     }
                 });
     }
