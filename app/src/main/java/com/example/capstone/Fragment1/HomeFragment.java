@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.media3.session.MediaController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +41,6 @@ import com.example.capstone.Data.AccountData;
 import com.example.capstone.Adapter.MusicListAdapter;
 import com.example.capstone.Data.MusicListAdapterData;
 import com.example.capstone.Interface.MusicListener;
-import com.example.capstone.Service.MusicService;
 import com.example.capstone.Interface.MusicListListener;
 import com.example.capstone.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,9 +61,9 @@ public class HomeFragment extends Fragment implements MusicListListener {
     MusicListener musicListener;
     ImageView upload, account, logout;
 
-    ArrayList<CategoryData> mList;
+    ArrayList<CategoryData> categoryList;
     CategoryAdapter categoryAdapter;
-    RecyclerView home_recycler;
+    RecyclerView category_recycler;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -90,21 +88,21 @@ public class HomeFragment extends Fragment implements MusicListListener {
         dialog.setCancelable(false);
         
         // 카테고리
-        home_recycler = v.findViewById(R.id.home_recycler);
-        home_recycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));	// 가로
-        mList = new ArrayList<>();
-        mList.add(new CategoryData("ambient", "Ambient"));
-        mList.add(new CategoryData("classical", "Classical"));
-        mList.add(new CategoryData("disco", "Disco"));
-        mList.add(new CategoryData("edm", "Dance & EDM"));
-        mList.add(new CategoryData("hiphop", "Hip hop"));
-        mList.add(new CategoryData("jazz", "Jazz"));
-        mList.add(new CategoryData("rnb", "R&B"));
-        mList.add(new CategoryData("reggae", "Reggae"));
-        mList.add(new CategoryData("rock", "Rock"));
+        category_recycler = v.findViewById(R.id.category_recycler);
+        category_recycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));	// 가로
+        categoryList = new ArrayList<>();
+        categoryList.add(new CategoryData("ambient", "Ambient"));
+        categoryList.add(new CategoryData("classical", "Classical"));
+        categoryList.add(new CategoryData("disco", "Disco"));
+        categoryList.add(new CategoryData("edm", "Dance & EDM"));
+        categoryList.add(new CategoryData("hiphop", "Hip hop"));
+        categoryList.add(new CategoryData("jazz", "Jazz"));
+        categoryList.add(new CategoryData("rnb", "R&B"));
+        categoryList.add(new CategoryData("reggae", "Reggae"));
+        categoryList.add(new CategoryData("rock", "Rock"));
 
-        categoryAdapter = new CategoryAdapter(mList);
-        home_recycler.setAdapter(categoryAdapter);
+        categoryAdapter = new CategoryAdapter(categoryList);
+        category_recycler.setAdapter(categoryAdapter);
 
         // 곡
         upload = v.findViewById(R.id.home_upload);

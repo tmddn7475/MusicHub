@@ -409,8 +409,6 @@ public class MainActivity extends AppCompatActivity implements MusicListener {
         } else {
             ready_music(preferences.getString("url", null));
             mediaController.play();
-            editor.putString("url", preferences.getString("url", null));
-            editor.apply();
         }
     }
 

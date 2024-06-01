@@ -136,8 +136,6 @@ public class MusicService extends MediaSessionService {
             }
         } else {
             playMusic(preferences.getString("url", null));
-            editor.putString("url", preferences.getString("url", null));
-            editor.apply();
         }
     }
 

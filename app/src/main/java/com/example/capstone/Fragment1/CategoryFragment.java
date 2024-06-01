@@ -63,6 +63,7 @@ public class CategoryFragment extends Fragment implements MusicListListener {
         String str = getArguments().getString("category");
 
         category_name.setText(str);
+        assert str != null;
         getImage(str);
         getSongs(str);
 
