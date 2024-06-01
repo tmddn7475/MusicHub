@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,10 @@ public class EtcFragment extends BottomSheetDialogFragment {
         etc_comment = v.findViewById(R.id.etc_comment);
         etc_edit = v.findViewById(R.id.etc_edit);
         etc_add_playlist = v.findViewById(R.id.etc_add_playlist);
+
+        etc_song_name.setSingleLine(true);    // 한줄로 표시하기
+        etc_song_name.setEllipsize(TextUtils.TruncateAt.MARQUEE); // 흐르게 만들기
+        etc_song_name.setSelected(true);
 
         mainActivity = (MainActivity) getContext();
         assert mainActivity != null;

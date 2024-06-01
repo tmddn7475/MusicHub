@@ -102,7 +102,6 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 uploadImageToServer(bytes, email, email, password, nickname);
                             } else {
-                                // If sign in fails, display a message to the user.
                                 Toast.makeText(RegisterActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
                                 progress_dialog.dismiss();
                             }
