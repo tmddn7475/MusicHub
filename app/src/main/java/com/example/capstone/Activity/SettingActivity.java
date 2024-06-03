@@ -30,7 +30,6 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
                 Log.d("TAG", "onSharedPreferenceChanged: " + key);
-
             }
         });
 

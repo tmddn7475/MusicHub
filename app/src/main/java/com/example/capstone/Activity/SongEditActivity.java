@@ -112,9 +112,9 @@ public class SongEditActivity extends AppCompatActivity {
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             MusicListAdapterData data = ds.getValue(MusicListAdapterData.class);
                             song_key = ds.getKey();
-                            image_url = data.getImageUrl();
 
                             assert data != null;
+                            image_url = data.getImageUrl();
                             song_edit_name.setText(data.getSongName());
                             song_edit_category.setText(data.getSongCategory());
                             song_edit_description.setText(data.getSongInfo());
