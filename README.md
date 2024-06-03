@@ -1,3 +1,5 @@
+## MusicHub
+
 개발기간 = 2024.03.07 ~ 2024.06.01 
 
 파이어베이스를 이용해서 만든 음악 스트리밍 어플입니다
@@ -10,22 +12,35 @@ media3나 이런 거에 익숙하지 않다보니 의도치 않게 버그나 에
 
 android를 공부하는 분들에게 도움이 되었으면 합니다
 
-기능
+### 기능
 
-계정 생성, 로그인
+로그인/회원가입, 음악 업로드
 
-음악 업로드
+좋아요 기능, 유저 팔로우
 
-좋아요 기능
+댓글 기능, 내 앨범 만들기
 
-유저 팔로우
+### 이미지 출처 
 
-댓글 기능
+Pixabay - https://pixabay.com/
 
-내 앨범 만들기
+Unsplash - https://unsplash.com/
 
 
-*********** 중요 **************
+### 사용한 오픈소스 
+
+CircleImageView - https://github.com/hdodenhof/CircleImageView
+
+Glide - https://github.com/bumptech/glide
+
+imagePicker - https://github.com/Dhaval2404/ImagePicker
+
+
+
+
+*************************
+### 중요
+
 1. 어플을 실행하기 위해선 먼저 파이어베이스를 연동해주시길 바랍니다
 2. Realtime Database, Authentication, Storage을 만들어주세요
 
