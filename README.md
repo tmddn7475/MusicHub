@@ -33,7 +33,7 @@ CircleImageView - https://github.com/hdodenhof/CircleImageView
 
 Glide - https://github.com/bumptech/glide
 
-imagePicker - https://github.com/Dhaval2404/ImagePicker
+ImagePicker - https://github.com/Dhaval2404/ImagePicker
 
 Glide Transformations - https://github.com/wasabeef/glide-transformations
 
