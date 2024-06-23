@@ -13,7 +13,7 @@ public class PlayListDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "create table playlist (songName text not null, songUrl text not null primary key);";
+        String sql = "create table playlist (songName text not null, songUrl text not null primary key, imageUrl text not null, email text not null, songDuration text not null);";
         db.execSQL(sql);
 
         String sql2 = "create table search (searchText text not null);";
@@ -32,6 +32,9 @@ public class PlayListDB extends SQLiteOpenHelper {
 
         contentValues.put("songName", data.getSongName());
         contentValues.put("songUrl", data.getSongUrl());
+        contentValues.put("imageUrl", data.getImageUrl());
+        contentValues.put("email", data.getEmail());
+        contentValues.put("songDuration", data.getSongDuration());
         sqLiteDatabase.insert("playlist", null, contentValues);
     }
     public void addSearch(String str){
