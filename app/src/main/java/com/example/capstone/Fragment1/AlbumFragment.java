@@ -151,14 +151,12 @@ public class AlbumFragment extends Fragment implements MusicListListener {
                         list_edit_btn.setVisibility(View.GONE);
                     }
                 }
-
                 if(list_description.getLineCount() == 1){
                     list_show_more.setVisibility(View.GONE);
                 } else {
                     showMore();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }
         });
@@ -169,6 +167,7 @@ public class AlbumFragment extends Fragment implements MusicListListener {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         track_num = 0;
+                        musicListAdapter.resetList();
                         if (snapshot.getChildren() != null && snapshot.getChildren().iterator().hasNext()){
                             //exist
                             for (DataSnapshot ds : snapshot.getChildren()) {

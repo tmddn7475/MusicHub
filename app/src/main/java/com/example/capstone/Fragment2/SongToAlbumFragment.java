@@ -44,6 +44,7 @@ public class SongToAlbumFragment extends BottomSheetDialogFragment {
         song_to_list_text = v.findViewById(R.id.song_to_list_text);
 
         listAdapter = new MyAlbumAdapter();
+        assert getArguments() != null;
         url = getArguments().getString("url");
         getList();
 

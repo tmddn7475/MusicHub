@@ -40,6 +40,7 @@ public class AccountAlbumFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_account_list, container, false);
 
+        assert getArguments() != null;
         email = getArguments().getString("email");
         list_gridview = v.findViewById(R.id.list_gridview);
         list_none = v.findViewById(R.id.list_none);
