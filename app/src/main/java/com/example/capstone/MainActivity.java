@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements MusicListener {
                     bar_artist.setText(mld.getSongArtist());
 
                     if(cursor.getCount() < 1){
-                        playListDB.addPlaylist_song(mld);
+                        playListDB.addPlaylist_song(mld, Static_command.getTime2());
                     }
                 }
             }

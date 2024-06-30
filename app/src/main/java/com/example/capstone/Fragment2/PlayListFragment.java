@@ -31,6 +31,10 @@ import com.example.capstone.Data.PlayListDB;
 import com.example.capstone.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class PlayListFragment extends BottomSheetDialogFragment implements PlayListListener {
 
@@ -39,7 +43,6 @@ public class PlayListFragment extends BottomSheetDialogFragment implements PlayL
     MediaController mediaController;
 
     BottomSheetBehavior bottomSheetBehavior;
-    MusicListAdapterData playListData;
     PlayListAdapter playListAdapter;
     public static PlayListDB playListDB;
     RecyclerView playlist;
@@ -138,22 +141,10 @@ public class PlayListFragment extends BottomSheetDialogFragment implements PlayL
         String sql = "select * from playlist";
         Cursor cursor = database.rawQuery(sql, null);
         while(cursor.moveToNext()){
-            playListData = new MusicListAdapterData();
-            playListData.setSongName(cursor.getString(0));
-            playListData.setSongUrl(cursor.getString(1));
-            playListData.setImageUrl(cursor.getString(2));
-            playListData.setEmail(cursor.getString(3));
-            playListData.setSongDuration(cursor.getString(4));
-
-            playListAdapter.addItem(0, playListData);
+            getTrack(cursor.getString(1), cursor.getString(2));
         }
-        playlist.setAdapter(playListAdapter);
         helper = new ItemTouchHelper(new ItemTouchHelperCallback(playListAdapter));
         helper.attachToRecyclerView(playlist);
-
-        if(mediaController != null){
-            setUpCurrent(MainActivity.current_url);
-        }
 
         // media로 돌아가기
         playlist_media_btn = v.findViewById(R.id.playlist_media_btn);
@@ -181,7 +172,6 @@ public class PlayListFragment extends BottomSheetDialogFragment implements PlayL
         playListAdapter.notifyDataSetChanged();
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -197,6 +187,27 @@ public class PlayListFragment extends BottomSheetDialogFragment implements PlayL
                 dismiss();
             }
         });
+    }
+
+    private void getTrack(String url, String time){
+        FirebaseDatabase.getInstance().getReference("Songs").orderByChild("songUrl").equalTo(url).limitToFirst(1)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @SuppressLint("NotifyDataSetChanged")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            MusicListAdapterData mld = ds.getValue(MusicListAdapterData.class);
+                            assert mld != null;
+                            playListAdapter.addItem(mld, time);
+                        }
+                        playListAdapter.sort();
+                        playlist.setAdapter(playListAdapter);
+                        playListAdapter.notifyDataSetChanged();
+                        setUpCurrent(MainActivity.current_url);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
     }
 
     @Override

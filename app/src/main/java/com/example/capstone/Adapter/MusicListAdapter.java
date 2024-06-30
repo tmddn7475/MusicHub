@@ -119,6 +119,16 @@ public class MusicListAdapter extends BaseAdapter implements Filterable {
         list.add(0, listData);
     }
 
+    public void addItemToList3(MusicListAdapterData listData, String time){
+        listData.setTime(time);
+        list.add(listData);
+    }
+
+    public void sort(){
+        Comparator<MusicListAdapterData> comparator = (prod1, prod2) -> prod1.getTime().compareTo(prod2.getTime());
+        list.sort(comparator.reversed());
+    }
+
     @Override
     public Filter getFilter() {
         if(listFilter == null) {

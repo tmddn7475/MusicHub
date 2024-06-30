@@ -1,18 +1,20 @@
 package com.example.capstone.Data;
 
 public class AlbumToSongData {
-    String key, songUrl, key_songUrl;
+    String key, songUrl, key_songUrl, time;
 
     public AlbumToSongData() {
         this.songUrl = "";
         this.key = "";
         this.key_songUrl = "";
+        this.time = "";
     }
 
-    public AlbumToSongData(String key, String songUrl) {
+    public AlbumToSongData(String key, String songUrl, String time) {
         this.key = key;
         this.songUrl = songUrl;
         this.key_songUrl = key + "_" + songUrl;
+        this.time = time;
     }
 
     public String getKey() {
@@ -37,5 +39,13 @@ public class AlbumToSongData {
 
     public void setKey_songUrl(String key_songUrl) {
         this.key_songUrl = key_songUrl;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

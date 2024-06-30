@@ -15,6 +15,7 @@ import com.example.capstone.Data.MusicListAdapterData;
 import com.example.capstone.R;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class SongsEditAdapter extends BaseAdapter {
     public ArrayList<MusicListAdapterData> list = new ArrayList<MusicListAdapterData>();
@@ -60,17 +61,23 @@ public class SongsEditAdapter extends BaseAdapter {
         return view;
     }
 
-    public void addItemToList(MusicListAdapterData data){
+    public void addItemToList(MusicListAdapterData data, String time){
+        data.setTime(time);
         list.add(data);
     }
 
+    public void sort(){
+        Comparator<MusicListAdapterData> comparator = (prod1, prod2) -> prod1.getTime().compareTo(prod2.getTime());
+        list.sort(comparator.reversed());
+    }
+
     public String existList(){
-        String url = "";
+        StringBuilder url = new StringBuilder();
         for(int i = 0; i < list.size(); i++){
             MusicListAdapterData data = list.get(i);
-            url += data.getSongUrl();
+            url.append(data.getSongUrl());
         }
 
-        return url;
+        return url.toString();
     }
 }

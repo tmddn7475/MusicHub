@@ -142,7 +142,7 @@ public class EtcFragment extends BottomSheetDialogFragment {
                 String sql = "select * from playlist where songUrl = '" + data.getSongUrl() + "'";
                 Cursor cursor = database.rawQuery(sql, null);
                 if(cursor.getCount() < 1){
-                    playListDB.addPlaylist_song(data);
+                    playListDB.addPlaylist_song(data, Static_command.getTime2());
                 }
                 Toast.makeText(getContext(), "재생목록에 추가되었습니다\n중복이 있을 경우 추가되지 않습니다", Toast.LENGTH_SHORT).show();
                 dismiss();

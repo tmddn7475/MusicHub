@@ -99,7 +99,7 @@ public class AlbumEditActivity extends AppCompatActivity {
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             AlbumToSongData mld = ds.getValue(AlbumToSongData.class);
                             assert mld != null;
-                            getTracks(mld.getSongUrl());
+                            getTracks(mld.getSongUrl(), mld.getTime());
                         }
                     }
                     @Override
@@ -210,7 +210,7 @@ public class AlbumEditActivity extends AppCompatActivity {
                 });
     }
 
-    private void getTracks(String url){
+    private void getTracks(String url, String time){
         FirebaseDatabase.getInstance().getReference("Songs").orderByChild("songUrl").equalTo(url).limitToFirst(1)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @SuppressLint("SetTextI18n")
@@ -219,8 +219,9 @@ public class AlbumEditActivity extends AppCompatActivity {
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             MusicListAdapterData mld = ds.getValue(MusicListAdapterData.class);
                             assert mld != null;
-                            songsEditAdapter.addItemToList(mld);
+                            songsEditAdapter.addItemToList(mld, time);
                         }
+                        songsEditAdapter.sort();
                         album_edit_list.setAdapter(songsEditAdapter);
                         songsEditAdapter.notifyDataSetChanged();
                     }

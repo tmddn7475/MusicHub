@@ -35,6 +35,7 @@ import com.example.capstone.Interface.MusicListListener;
 import com.example.capstone.Interface.MusicListener;
 import com.example.capstone.Data.AlbumToSongData;
 import com.example.capstone.R;
+import com.example.capstone.Static_command;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -110,7 +111,7 @@ public class AlbumFragment extends Fragment implements MusicListListener {
                     Cursor cursor = database.rawQuery(sql, null);
 
                     if(cursor.getCount() < 1){
-                        playListDB.addPlaylist_song(musicListAdapter.filterList.get(i));
+                        playListDB.addPlaylist_song(musicListAdapter.filterList.get(i), Static_command.getTime2());
                     }
                     if(i == 0){
                         musicListener.sendMessage(musicListAdapter.filterList.get(i).getSongUrl());
@@ -173,7 +174,7 @@ public class AlbumFragment extends Fragment implements MusicListListener {
                             for (DataSnapshot ds : snapshot.getChildren()) {
                                 AlbumToSongData mld = ds.getValue(AlbumToSongData.class);
                                 assert mld != null;
-                                getTracks(mld.getSongUrl());
+                                getTracks(mld.getSongUrl(), mld.getTime());
                             }
                             list_play_btn.setVisibility(View.VISIBLE);
                             dialog.dismiss();
@@ -213,7 +214,7 @@ public class AlbumFragment extends Fragment implements MusicListListener {
         }
     }
 
-    private void getTracks(String url){
+    private void getTracks(String url, String time){
         FirebaseDatabase.getInstance().getReference("Songs").orderByChild("songUrl").equalTo(url).limitToFirst(1)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @SuppressLint("SetTextI18n")
@@ -222,10 +223,11 @@ public class AlbumFragment extends Fragment implements MusicListListener {
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             MusicListAdapterData mld = ds.getValue(MusicListAdapterData.class);
                             assert mld != null;
-                            musicListAdapter.addItemToList(mld);
+                            musicListAdapter.addItemToList3(mld, time);
                             track_num++;
                         }
                         list_track_num.setText(track_num + "곡");
+                        musicListAdapter.sort();
                         list_trackList.setAdapter(musicListAdapter);
                         musicListAdapter.notifyDataSetChanged();
                     }

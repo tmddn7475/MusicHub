@@ -106,13 +106,10 @@ public class FeedListAdapter extends BaseAdapter {
     public void addItemToList(MusicListAdapterData listData){
         list.add(listData);
     }
+
     public void sort(){
         Comparator<MusicListAdapterData> comparator = (prod1, prod2) -> prod1.getTime().compareTo(prod2.getTime());
         list.sort(comparator.reversed());
-
-        for(int i = 0; i < list.size(); i++){
-            Log.i("list", String.valueOf(list.get(i)));
-        }
     }
     private String get_dDay(String time, String artist){
         String[] a = time.split("/");

@@ -54,7 +54,7 @@ public class Static_command {
                             Log.i("album_exist", "already exist");
                         } else {
                             // not exist
-                            AlbumToSongData albumToSongData = new AlbumToSongData(key, url);
+                            AlbumToSongData albumToSongData = new AlbumToSongData(key, url, getTime2());
                             FirebaseDatabase.getInstance().getReference("PlayLists_song").push().setValue(albumToSongData);
                         }
                     }
@@ -68,6 +68,16 @@ public class Static_command {
         long mNow;
         Date mDate;
         SimpleDateFormat mFormat = new SimpleDateFormat("yyyy/MM/dd");
+
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
+    }
+
+    public static String getTime2(){
+        long mNow;
+        Date mDate;
+        SimpleDateFormat mFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
         mNow = System.currentTimeMillis();
         mDate = new Date(mNow);

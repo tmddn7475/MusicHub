@@ -22,11 +22,11 @@ import com.example.capstone.R;
 import com.example.capstone.Fragment2.PlayListFragment;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.ViewHolder> implements ItemTouchHelperListener {
 
     private final ArrayList<MusicListAdapterData> mList = new ArrayList<MusicListAdapterData>();
-    private final ArrayList<String> list = new ArrayList<String>();
     PlayListListener playListListener;
     Context context;
     public int selectedItem = -1;
@@ -36,20 +36,19 @@ public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.ViewHo
         this.playListListener = playListListener;
     }
 
-    public void addItem(int position, MusicListAdapterData item){
-        mList.add(position, item);
-        list.add(position, item.getSongUrl());
+    public void addItem(MusicListAdapterData item, String time){
+        item.setTime(time);
+        mList.add(item);
     }
 
     public void removeItem(int position){
-        PlayListFragment.playListDB.deletePlayList_song(list.get(position));
+        MusicListAdapterData list = mList.get(position);
+        PlayListFragment.playListDB.deletePlayList_song(list.getSongUrl());
         mList.remove(position);
-        list.remove(position);
     }
 
     public void resetList(){
         mList.clear();
-        list.clear();
     }
 
     @Override
@@ -58,7 +57,17 @@ public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.ViewHo
     }
 
     public int getNumber(String url){
-        return list.indexOf(url);
+        for(int i = 0; i < mList.size(); i++){
+            if(mList.get(i).getSongUrl().equals(url)){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public void sort(){
+        Comparator<MusicListAdapterData> comparator = (prod1, prod2) -> prod1.getTime().compareTo(prod2.getTime());
+        mList.sort(comparator.reversed());
     }
 
     @NonNull
