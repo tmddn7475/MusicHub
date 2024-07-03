@@ -1,16 +1,18 @@
 package com.example.capstone.Data;
 
 public class HistoryData {
-    String email, songUrl;
+    String email, songUrl, time;
 
     public HistoryData() {
         this.songUrl = "";
         this.email = "";
+        this.time = "";
     }
 
-    public HistoryData(String songUrl, String email) {
+    public HistoryData(String songUrl, String email, String time) {
         this.songUrl = songUrl;
         this.email = email;
+        this.time = time;
     }
 
     public String getEmail() {
@@ -29,4 +31,11 @@ public class HistoryData {
         this.songUrl = songUrl;
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 }

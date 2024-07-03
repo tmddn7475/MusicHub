@@ -71,12 +71,15 @@ public class CommentsFragment extends BottomSheetDialogFragment implements Comme
             @Override
             public void onClick(View v) {
                 String comment = comment_edit.getText().toString();
-                if(!comment.isEmpty()){
+                if(comment.isEmpty()){
+                    Toast.makeText(getActivity(), "내용을 적어주세요", Toast.LENGTH_SHORT).show();
                     uploadComment(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
                             name, imageUrl, comment, Static_command.getTime(), getArguments().getString("url"));
                     comment_edit.setText("");
                 } else {
-                    Toast.makeText(getActivity(), "내용을 적어주세요", Toast.LENGTH_SHORT).show();
+                    uploadComment(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
+                            name, imageUrl, comment, Static_command.getTime(), getArguments().getString("url"));
+                    comment_edit.setText("");
                 }
             }
         });

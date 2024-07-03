@@ -417,7 +417,7 @@ public class MainActivity extends AppCompatActivity implements MusicListener {
     // 음악 기록에 저장
     private void putHistory(String url){
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        HistoryData historyData = new HistoryData(url, email);
+        HistoryData historyData = new HistoryData(url, email, Static_command.getTime2());
         FirebaseDatabase.getInstance().getReference("History").push().setValue(historyData);
     }
 

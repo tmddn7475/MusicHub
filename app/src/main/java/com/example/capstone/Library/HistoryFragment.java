@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 public class HistoryFragment extends Fragment implements MusicListListener {
 
-    ArrayList<String> arr = new ArrayList<String>();
+    ArrayList<HistoryData> arr = new ArrayList<HistoryData>();
     ArrayList<String> arr2 = new ArrayList<String>();
     ListView history_list;
     TextView history_text;
@@ -80,12 +80,14 @@ public class HistoryFragment extends Fragment implements MusicListListener {
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         HistoryData data = ds.getValue(HistoryData.class);
                         assert data != null;
-                        arr.add(data.getSongUrl());
+                        arr.add(data);
                     }
-                    for(String strValue : arr) {
-                        if(!arr2.contains(strValue)) {
-                            arr2.add(strValue);
-                            getHistory_music(strValue);
+
+                    for(int i = arr.size()-1; i >= 0; i--) {
+                        HistoryData history = arr.get(i);
+                        if(!arr2.contains(history.getSongUrl())) {
+                            arr2.add(history.getSongUrl());
+                            getHistory_music(history);
                         }
                     }
                 } else {
@@ -109,17 +111,18 @@ public class HistoryFragment extends Fragment implements MusicListListener {
         return v;
     }
 
-    public void getHistory_music(String url){
+    public void getHistory_music(HistoryData data){
         DatabaseReference mReference = FirebaseDatabase.getInstance().getReference("Songs");
-        Query query = mReference.orderByChild("songUrl").equalTo(url);
+        Query query = mReference.orderByChild("songUrl").equalTo(data.getSongUrl());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     MusicListAdapterData mld = ds.getValue(MusicListAdapterData.class);
                     assert mld != null;
-                    musicListAdapter.addItemToList(mld);
+                    musicListAdapter.addItemToList3(mld, data.getTime());
                 }
+                musicListAdapter.sort();
                 history_list.setAdapter(musicListAdapter);
                 musicListAdapter.notifyDataSetChanged();
             }
