@@ -1,5 +1,7 @@
 ## MusicHub
 
+kotlin version - https://github.com/tmddn7475/MusicHub_kotlin
+
 개발기간 = 2024.03.07 ~ 2024.06.01 
 
 파이어베이스를 이용해서 만든 음악 스트리밍 어플입니다
