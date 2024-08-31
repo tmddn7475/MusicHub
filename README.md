@@ -14,7 +14,8 @@ media3나 이런 부분이 처음이기에 의도치 않게 버그나 에러가 
 
 android를 공부하는 분들에게 도움이 되었으면 합니다
 
-### 기능
+기능
+-------------
 
 로그인 / 회원가입, 음악 업로드
 
@@ -22,14 +23,16 @@ android를 공부하는 분들에게 도움이 되었으면 합니다
 
 댓글 기능, 내 앨범 만들기
 
-### 이미지 출처 
+이미지 출처 
+-------------
 
 Pixabay - https://pixabay.com/
 
 Unsplash - https://unsplash.com/
 
 
-### 사용한 오픈소스 
+사용한 오픈소스 
+-------------
 
 CircleImageView - https://github.com/hdodenhof/CircleImageView
 
