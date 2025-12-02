@@ -44,7 +44,7 @@ Glide Transformations - https://github.com/wasabeef/glide-transformations
 
 
 *************************
-### 중요
+### 실행 방법
 
 1. 어플을 실행하기 위해선 먼저 파이어베이스를 연동해주시길 바랍니다
 2. Realtime Database, Authentication, Storage을 만들어주세요
